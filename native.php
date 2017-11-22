@@ -40,7 +40,7 @@ class WxpayService
             'appid' => $this->appid,
             'key' => $this->apiKey,
         );
-        $orderName = iconv('GBK','UTF-8',$orderName);
+        //$orderName = iconv('GBK','UTF-8',$orderName);
         $unified = array(
             'appid' => $config['appid'],
             'attach' => 'pay',             //商家数据包，原样返回，如果填写中文，请注意转换为utf-8
