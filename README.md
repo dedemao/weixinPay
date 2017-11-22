@@ -30,5 +30,8 @@ H5支付目前仅支持企业，我是个体工商户，申请失败了，故暂
 
 
 # 若对您有帮助，可以赞助并支持下作者哦，谢谢！
---
-![](https://www.dedemao.com/uploads/zan.jpg)
+
+<p align="center">
+    <img src="https://www.dedemao.com/uploads/zan.jpg">
+    <p align="center">联系邮箱：884358@qq.com</p>
+</p>
