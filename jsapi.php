@@ -274,7 +274,6 @@ class WxpayService
                 $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
         }
         $xml .= "</xml>";
-        file_put_contents('1.txt',$xml);
         return $xml;
     }
 
