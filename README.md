@@ -9,7 +9,7 @@ native.php	微信原生支付（扫码支付）
 
 jsapi.php	  公众号支付
 
-redpack.php 现金红包
+redpack.php 现金红包（制作中）
 
 h5.php      H5支付（制作中）
 
