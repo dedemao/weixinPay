@@ -11,7 +11,6 @@ jsapi.php	  公众号支付
 
 redpack.php 现金红包
 
-h5.php      H5支付（制作中）
 
 
 # 注意事项
