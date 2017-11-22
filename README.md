@@ -5,13 +5,15 @@
 
 # 文件对应说明
 
-native.php	微信原生支付（扫码支付）
+native.php	  微信原生支付（扫码支付）
 
-jsapi.php	  公众号支付
+jsapi.php	    公众号支付
 
-redpack.php 现金红包
+redpack.php   现金红包
 
-notify.php  异步回调通知
+transfers.php 企业付款到零钱
+
+notify.php    异步回调通知
 
 H5支付目前仅支持企业，我是个体工商户，申请失败了，故暂时无法支持。如果你愿意提供你的资料给我，请联系QQ：884358
 
