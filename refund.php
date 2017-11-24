@@ -1,7 +1,7 @@
 <?php
 /**
  * 关于微信退款的说明
- * 1.微信退款要求必传证书，需要到https://pay.weixin.qq.com 账户中心->账户设置->API安全->下载证书，证书路径在第222行和225行修改
+ * 1.微信退款要求必传证书，需要到https://pay.weixin.qq.com 账户中心->账户设置->API安全->下载证书，证书路径在第119行和122行修改
  * 2.错误码参照 ：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_4
  */
 header('Content-type:text/html; Charset=utf-8');
