@@ -38,11 +38,9 @@ class WxpayService
      * 退款
      * @param float $totalFee 订单金额 单位元
      * @param float $refundFee 退款金额 单位元
-     * @param string $outTradeNo 唯一的订单号
-     * @param string $outTradeNo 唯一的订单号
-     * @param string $orderName 订单名称
-     * @param string $notifyUrl 支付结果通知url 不要有问号
-     * @param string $timestamp 支付时间
+     * @param string $refundNo 退款单号
+     * @param string $wxOrderNo 微信订单号
+     * @param string $orderNo 商户订单号
      * @return string
      */
     public function doRefund($totalFee, $refundFee, $refundNo, $wxOrderNo='',$orderNo='')
