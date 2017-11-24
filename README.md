@@ -5,6 +5,10 @@
 
 一个PHP文件搞定支付宝系列（正在更新中）请移步：https://github.com/dedemao/alipay
 
+# PHP版本兼容
+
+PHP 5.0+
+
 # 文件对应说明
 
 native.php	  微信原生支付（扫码支付）
