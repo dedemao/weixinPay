@@ -3,7 +3,7 @@
 
 网上的很多PHP微信支付接入教程都颇为复杂，且需要配置和引入较多的文件，本人通过整理后给出一个单文件版的，希望可以给各位想接入微信支付的带来些许帮助和借鉴意义。
 
-一个PHP文件搞定支付宝系列（正在更新中）请移步：https://github.com/dedemao/alipay
+一个PHP文件搞定支付宝系列请移步：https://github.com/dedemao/alipay
 
 # 环境依赖
 
