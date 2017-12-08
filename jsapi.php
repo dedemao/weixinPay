@@ -13,7 +13,7 @@ if(!$openId) exit('获取openid失败');
 $outTradeNo = uniqid();     //你自己的商品订单号
 $payAmount = 0.01;          //付款金额，单位:元
 $orderName = '支付测试';    //订单标题
-$notifyUrl = 'https://www.xxx.com/wx/native.php';     //付款成功后的回调地址(不要有问号)
+$notifyUrl = 'https://www.xxx.com/wx/notify.php';     //付款成功后的回调地址(不要有问号)
 $payTime = time();      //付款时间
 $jsApiParameters = $wxPay->createJsBizPackage($openId,$payAmount,$outTradeNo,$orderName,$notifyUrl,$payTime);
 $jsApiParameters = json_encode($jsApiParameters);
