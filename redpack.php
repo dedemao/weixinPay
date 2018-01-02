@@ -1,7 +1,7 @@
 <?php
 /**
  * 关于微信现金红包的说明
- * 1.微信现金红包要求必传证书，需要到https://pay.weixin.qq.com 账户中心->账户设置->API安全->下载证书，证书路径在第214行和217行修改
+ * 1.微信现金红包要求必传证书，需要到https://pay.weixin.qq.com 账户中心->账户设置->API安全->下载证书
  * 2.默认的使用场景是抽奖（即scene_id参数为PRODUCT_2），额度是1-200元，所以测试时的最低金额是1元。如需修改在产品中心->产品大全->现金红包->产品设置中修改
  * 3.错误码参照 ：https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_4&index=3
  */
@@ -10,34 +10,40 @@ $mchid = 'xxxxx';          //微信支付商户号 PartnerID 通过微信支付�
 $appid = 'xxxxx';  //微信支付申请对应的公众号的APPID
 $appKey = 'xxxxx';   //微信支付申请对应的公众号的APP Key
 $apiKey = 'xxxxx';   //https://pay.weixin.qq.com 帐户设置-安全设置-API安全-API密钥-设置API密钥
+//填写证书所在位置，证书在https://pay.weixin.qq.com 账户中心->账户设置->API安全->下载证书，下载后将apiclient_cert.pem和apiclient_key.pem上传到服务器。
+$apiclient_cert = getcwd().'/cert/apiclient_cert.pem';
+$apiclient_key = getcwd().'/cert/apiclient_key.pem';
 
 //①、获取当前访问页面的用户openid（如果给指定用户发送红包，则填写指定用户的openid)
-$wxPay = new WxpayService($mchid,$appid,$appKey,$apiKey);
+$wxPay = new WxpayService($mchid,$appid,$appKey,$apiKey,$apiclient_cert,$apiclient_key);
 $openId = $wxPay->GetOpenid();      //获取openid
 if(!$openId) exit('获取openid失败');
 //②、发送红包
 $outTradeNo = uniqid();     //你自己的商品订单号
 $payAmount = 1;          //红包金额，单位:元
-$sendName = '织梦猫';    //红包发送者名称
-$wishing = '感谢您参加猜灯谜活动，祝您元宵节快乐！';      //红包祝福语
-$act_name='猜灯谜抢红包活动';           //活动名称
+$sendName = '元旦';    //红包发送者名称
+$wishing = '祝您元旦快乐！';      //红包祝福语
+$act_name='元旦快乐';           //活动名称
 $result = $wxPay->createJsBizPackage($openId,$payAmount,$outTradeNo,$sendName,$wishing,$act_name);
 echo 'success';
-
 class WxpayService
 {
     protected $mchid;
     protected $appid;
     protected $appKey;
     protected $apiKey;
+    protected $apiclient_cert;
+    protected $apiclient_key;
     public $data = null;
 
-    public function __construct($mchid, $appid, $appKey,$key)
+    public function __construct($mchid, $appid, $appKey,$key,$apiclient_cert,$apiclient_key)
     {
         $this->mchid = $mchid;
         $this->appid = $appid;
         $this->appKey = $appKey;
         $this->apiKey = $key;
+        $this->apiclient_cert = $apiclient_cert;
+        $this->apiclient_key = $apiclient_key;
     }
 
     /**
@@ -52,7 +58,7 @@ class WxpayService
         if (!isset($_GET['code'])){
             //触发微信返回code码
             $scheme = $_SERVER['HTTPS']=='on' ? 'https://' : 'http://';
-            $baseUrl = urlencode($scheme.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
+            $baseUrl = urlencode($scheme.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
             $url = $this->__CreateOauthUrlForCode($baseUrl);
             Header("Location: $url");
             exit();
@@ -128,13 +134,13 @@ class WxpayService
     }
 
     /**
-     * 发送红包
-     * @param string $openid 用户在该公众号下的Openid
-     * @param float $totalFee 红包金额 单位元
-     * @param string $outTradeNo 订单号
-     * @param string $orderName 红包发送者名称
-     * @param string $wishing 祝福语
-     * @param string $actName 互动名称
+     * 统一下单
+     * @param string $openid 调用【网页授权获取用户信息】接口获取到用户在该公众号下的Openid
+     * @param float $totalFee 收款总费用 单位元
+     * @param string $outTradeNo 唯一的订单号
+     * @param string $orderName 订单名称
+     * @param string $notifyUrl 支付结果通知url 不要有问号
+     * @param string $timestamp 支付时间
      * @return string
      */
     public function createJsBizPackage($openid, $totalFee, $outTradeNo, $sendName,$wishing,$actName)
@@ -153,14 +159,16 @@ class WxpayService
             'mch_billno' => $outTradeNo,
             'client_ip' => '127.0.0.1',
             'total_amount' => intval($totalFee * 100),       //单位 转为分
-            'total_num'=>1,                 //红包发放总人数
-            'wishing'=>$wishing,            //红包祝福语
+            'total_num'=>1,     //红包发放总人数
+            'wishing'=>$wishing,      //红包祝福语
             'act_name'=>$actName,           //活动名称
-            'remark'=>'remark',            //备注信息，如为中文注意转为UTF8编码
+            'remark'=>'remark',               //备注信息，如为中文注意转为UTF8编码
             'scene_id'=>'PRODUCT_2',      //发放红包使用场景，红包金额大于200时必传。https://pay.weixin.qq.com/wiki/doc/api/tools/cash_coupon.php?chapter=13_4&index=3
         );
         $unified['sign'] = self::getSign($unified, $config['key']);
         $responseXml = $this->curlPost('https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack', self::arrayToXml($unified));
+        file_put_contents('1.txt',print_r($responseXml,true));
+//        print_r($responseXml,true);die;
         $unifiedOrder = simplexml_load_string($responseXml, 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($unifiedOrder === false) {
             die('parse xml error');
@@ -217,7 +225,9 @@ class WxpayService
         curl_setopt($ch,CURLOPT_SSLKEY,getcwd().'/cert/apiclient_key.pem');
         //第二种方式，两个文件合成一个.pem文件
 //        curl_setopt($ch,CURLOPT_SSLCERT,getcwd().'/all.pem');
+
         $data = curl_exec($ch);
+        var_dump($data);die;
         curl_close($ch);
         return $data;
     }
@@ -241,6 +251,7 @@ class WxpayService
                 $xml .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
         }
         $xml .= "</xml>";
+        file_put_contents('1.txt',$xml);
         return $xml;
     }
 
