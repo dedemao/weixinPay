@@ -211,6 +211,10 @@ class WxpayService
         //第二种方式，两个文件合成一个.pem文件
 //        curl_setopt($ch,CURLOPT_SSLCERT,getcwd().'/all.pem');
         $data = curl_exec($ch);
+        if($data === false)
+        {
+            echo 'Curl error: ' . curl_error($ch);exit();
+        }        
         curl_close($ch);
         return $data;
     }
