@@ -11,9 +11,11 @@ PHP5.0以上，且需要开启CURL服务、SSL服务。
 
 # 文件对应说明
 
-native.php	  微信原生支付（扫码支付）
+native.php	  原生支付（扫码支付）
 
-jsapi.php	    公众号支付
+barcode.php	  刷卡支付（扫码支付）
+
+jsapi.php	   公众号支付
 
 redpack.php   现金红包
 
