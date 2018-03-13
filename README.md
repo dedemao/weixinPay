@@ -13,7 +13,7 @@ PHP5.0以上，且需要开启CURL服务、SSL服务。
 
 native.php	  原生支付（扫码支付）
 
-barcode.php	  刷卡支付（扫码支付）
+barcode.php	  刷卡支付（商户扫描用户收款码）
 
 jsapi.php	   公众号支付
 
