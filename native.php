@@ -13,6 +13,8 @@ $arr = $wxPay->createJsBizPackage($payAmount,$outTradeNo,$orderName,$notifyUrl,$
 //生成二维码
 $url = 'http://pan.baidu.com/share/qrcode?w=300&h=300&url='.$arr['code_url'];
 echo "<img src='{$url}' style='width:300px;'>";
+echo "<img src='{$url}' style='width:300px;'><br>";
+echo '二维码内容：'.$arr['code_url'];
 class WxpayService
 {
     protected $mchid;
