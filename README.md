@@ -5,6 +5,9 @@
 
 一个PHP文件搞定支付宝系列请移步：https://github.com/dedemao/alipay
 
+# 在线演示
+https://www.dedemao.com/wx/barcode.html
+
 # 环境依赖
 
 PHP5.0以上，且需要开启CURL服务、SSL服务。
