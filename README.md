@@ -6,7 +6,7 @@
 一个PHP文件搞定支付宝系列请移步：https://github.com/dedemao/alipay
 
 # 在线演示
-https://www.dedemao.com/wx/barcode.html
+https://www.dedemao.com/wx/demo.html
 
 # 环境依赖
 
