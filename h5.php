@@ -13,7 +13,7 @@ header('Content-type:text/html; Charset=utf-8');
 $mchid = 'xxxxx';          //微信支付商户号 PartnerID 通过微信支付商户资料审核后邮件发送
 $appid = 'xxxxx';  //微信支付申请对应的公众号的APPID
 $appKey = 'xxxxx';   //微信支付申请对应的公众号的APP Key
-$apiKey = 'xxxxx';
+$apiKey = 'xxxxx';  //https://pay.weixin.qq.com 帐户设置-安全设置-API安全-API密钥-设置API密钥
 
 $wxPay = new WxpayService($mchid,$appid,$apiKey);
 $outTradeNo = uniqid();     //你自己的商品订单号
