@@ -35,7 +35,7 @@ class WxpayService
             'appid' => $this->appid,
             'key' => $this->apiKey,
         );
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        $postStr = file_get_contents('php://input');
         $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($postObj === false) {
             die('parse xml error');
