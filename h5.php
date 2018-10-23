@@ -19,6 +19,7 @@ $outTradeNo = uniqid();     //你自己的商品订单号
 $payAmount = 0.01;          //付款金额，单位:元
 $orderName = '支付测试';    //订单标题
 $notifyUrl = 'http://www.xxx.com/wx/notify.php';     //付款成功后的回调地址(不要有问号)
+$returnUrl = 'http://www.baidu.com';     //付款成功后，页面跳转的地址
 $wapUrl = 'www.xxx.com';   //WAP网站URL地址
 $wapName = 'H5支付';       //WAP 网站名
 /** 配置结束 */
@@ -28,6 +29,7 @@ $wxPay->setTotalFee($payAmount);
 $wxPay->setOutTradeNo($outTradeNo);
 $wxPay->setOrderName($orderName);
 $wxPay->setNotifyUrl($notifyUrl);
+$wxPay->setReturnUrl($returnUrl);
 $wxPay->setWapUrl($wapUrl);
 $wxPay->setWapName($wapName);
 
@@ -43,6 +45,7 @@ class WxpayService
     protected $outTradeNo;
     protected $orderName;
     protected $notifyUrl;
+    protected $returnUrl;
     protected $wapUrl;
     protected $wapName;
 
@@ -76,6 +79,10 @@ class WxpayService
     public function setNotifyUrl($notifyUrl)
     {
         $this->notifyUrl = $notifyUrl;
+    }
+    public function setReturnUrl($returnUrl)
+    {
+        $this->returnUrl = $returnUrl;
     }
 
     /**
@@ -116,7 +123,7 @@ class WxpayService
             die($unifiedOrder->return_msg);
         }
         if($unifiedOrder->mweb_url){
-            return $unifiedOrder->mweb_url;
+            return $unifiedOrder->mweb_url.'&redirect_url='.urlencode($this->returnUrl);
         }
         exit('error');
     }
