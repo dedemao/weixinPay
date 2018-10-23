@@ -4,7 +4,6 @@ $mchid = 'xxxxx';          //微信支付商户号 PartnerID 通过微信支付�
 $appid = 'xxxxx';  //微信支付申请对应的公众号的APPID
 $appKey = 'xxxxx';   //微信支付申请对应的公众号的APP Key
 $apiKey = 'xxxxx';   //https://pay.weixin.qq.com 帐户设置-安全设置-API安全-API密钥-设置API密钥
-
 //①、获取用户openid
 $wxPay = new WxpayService($mchid,$appid,$appKey,$apiKey);
 $openId = $wxPay->GetOpenid();      //获取openid
@@ -32,11 +31,11 @@ $jsApiParameters = json_encode($jsApiParameters);
                     <?php echo $jsApiParameters; ?>,
                     function(res){
                         WeixinJSBridge.log(res.err_msg);
-			if(res.err_msg=='get_brand_wcpay_request:ok'){
-				alert('支付成功！');
-			}else{
-				alert('支付失败：'+res.err_code+res.err_desc+res.err_msg);
-			}
+						if(res.err_msg=='get_brand_wcpay_request:ok'){
+							alert('支付成功！');
+						}else{
+							alert('支付失败：'+res.err_code+res.err_desc+res.err_msg);
+						}
                     }
                 );
             }
@@ -71,7 +70,6 @@ class WxpayService
     protected $appKey;
     protected $apiKey;
     public $data = null;
-
     public function __construct($mchid, $appid, $appKey,$key)
     {
         $this->mchid = $mchid; //https://pay.weixin.qq.com 产品中心-开发配置-商户号
@@ -79,7 +77,6 @@ class WxpayService
         $this->appKey = $appKey; //微信支付申请对应的公众号的APP Key
         $this->apiKey = $key;   //https://pay.weixin.qq.com 帐户设置-安全设置-API安全-API密钥-设置API密钥
     }
-
     /**
      * 通过跳转获取用户的openid，跳转流程如下：
      * 1、设置自己需要调回的url及其其他参数，跳转到微信服务器https://open.weixin.qq.com/connect/oauth2/authorize
@@ -103,7 +100,6 @@ class WxpayService
             return $openid;
         }
     }
-
     /**
      * 通过code从工作平台获取openid机器access_token
      * @param string $code 微信跳转回来带上的code
@@ -119,7 +115,6 @@ class WxpayService
         $openid = $data['openid'];
         return $openid;
     }
-
     /**
      * 构造获取open和access_toke的url地址
      * @param string $code，微信跳转带回的code
@@ -134,7 +129,6 @@ class WxpayService
         $bizString = $this->ToUrlParams($urlObj);
         return "https://api.weixin.qq.com/sns/oauth2/access_token?".$bizString;
     }
-
     /**
      * 构造获取code的url连接
      * @param string $redirectUrl 微信服务器回跳的url，需要url编码
@@ -150,7 +144,6 @@ class WxpayService
         $bizString = $this->ToUrlParams($urlObj);
         return "https://open.weixin.qq.com/connect/oauth2/authorize?".$bizString;
     }
-
     /**
      * 拼接签名字符串
      * @param array $urlObj
@@ -166,7 +159,6 @@ class WxpayService
         $buff = trim($buff, "&");
         return $buff;
     }
-
     /**
      * 统一下单
      * @param string $openid 调用【网页授权获取用户信息】接口获取到用户在该公众号下的Openid
@@ -220,7 +212,6 @@ class WxpayService
         $arr['paySign'] = self::getSign($arr, $config['key']);
         return $arr;
     }
-
     public static function curlGet($url = '', $options = array())
     {
         $ch = curl_init($url);
@@ -236,7 +227,6 @@ class WxpayService
         curl_close($ch);
         return $data;
     }
-
     public static function curlPost($url = '', $postData = '', $options = array())
     {
         if (is_array($postData)) {
@@ -258,7 +248,6 @@ class WxpayService
         curl_close($ch);
         return $data;
     }
-
     public static function createNonceStr($length = 16)
     {
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -280,7 +269,6 @@ class WxpayService
         $xml .= "</xml>";
         return $xml;
     }
-
     public static function getSign($params, $key)
     {
         ksort($params, SORT_STRING);
