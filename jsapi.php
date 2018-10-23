@@ -32,7 +32,11 @@ $jsApiParameters = json_encode($jsApiParameters);
                     <?php echo $jsApiParameters; ?>,
                     function(res){
                         WeixinJSBridge.log(res.err_msg);
-                        alert(res.err_code+res.err_desc+res.err_msg);
+						if(res.err_msg=='get_brand_wcpay_request:ok'){
+							alert('支付成功！');
+						}else{
+							alert('支付失败：'+res.err_code+res.err_desc+res.err_msg);
+						}
                     }
                 );
             }
