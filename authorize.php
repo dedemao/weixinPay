@@ -82,7 +82,7 @@ class WxService
 
     public $data = null;
 
-    public function __construct($appid, $appKey,$key)
+    public function __construct($appid, $appKey)
     {
         $this->appid = $appid; //微信支付申请对应的公众号的APPID
         $this->appKey = $appKey; //微信支付申请对应的公众号的APP Key
