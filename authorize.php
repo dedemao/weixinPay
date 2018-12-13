@@ -156,7 +156,7 @@ class WxService
         $urlObj["appid"] = $this->appid;
         $urlObj["redirect_uri"] = "$redirectUrl";
         $urlObj["response_type"] = "code";
-        $urlObj["scope"] = "snsapi_base";
+        $urlObj["scope"] = "snsapi_userinfo";
         $urlObj["state"] = "STATE";
         $bizString = $this->ToUrlParams($urlObj);
         return "https://open.weixin.qq.com/connect/oauth2/authorize?".$bizString;
