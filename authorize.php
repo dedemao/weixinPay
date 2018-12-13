@@ -2,8 +2,8 @@
 error_reporting(1);
 header('Content-type:text/html; Charset=utf-8');
 /* 配置开始 */
-$appid = '';  //微信支付申请对应的公众号的APPID
-$appKey = '';   //微信支付申请对应的公众号的APP Key
+$appid = '';  //微信公众平台->开发->基本配置->AppID
+$appKey = '';   //微信公众平台->开发->基本配置->AppSecret
 /* 配置结束 */
 
 //①、获取用户openid
