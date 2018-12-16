@@ -100,12 +100,7 @@ class WxService
         //通过code获得openid
         if (!isset($_GET['code'])){
             //触发微信返回code码
-            $scheme = $_SERVER['HTTPS']=='on' ? 'https://' : 'http://';
-			$uri = $_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
-			if($_SERVER['REQUEST_URI']){
-				$uri = $_SERVER['REQUEST_URI'];
-			}
-            $baseUrl = urlencode($scheme.$_SERVER['HTTP_HOST'].$uri);
+            $baseUrl = $this->getCurrentUrl();
             $url = $this->__CreateOauthUrlForCode($baseUrl);
             Header("Location: $url");
             exit();
@@ -115,6 +110,15 @@ class WxService
             $openid = $this->getOpenidFromMp($code);
             return $openid;
         }
+    }
+
+    public function getCurrentUrl()
+    {
+        $scheme = $_SERVER['HTTPS']=='on' ? 'https://' : 'http://';
+        $uri = $_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+        if($_SERVER['REQUEST_URI']) $uri = $_SERVER['REQUEST_URI'];
+        $baseUrl = urlencode($scheme.$_SERVER['HTTP_HOST'].$uri);
+        return $baseUrl;
     }
 
     /**
@@ -230,4 +234,3 @@ class WxService
     }
 
 }
-?>
