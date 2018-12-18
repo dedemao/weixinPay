@@ -56,6 +56,8 @@ class WxpayService
         );
         $unified['sign'] = self::getSign($unified, $config['key']);
         $responseXml = self::curlPost('https://api.mch.weixin.qq.com/pay/unifiedorder', self::arrayToXml($unified));
+		//禁止引用外部xml实体
+		libxml_disable_entity_loader(true);        
         $unifiedOrder = simplexml_load_string($responseXml, 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($unifiedOrder === false) {
             die('parse xml error');
