@@ -1,7 +1,7 @@
 <?php
 /**
- * 原生支付（扫码支付）及公众号支付的异步回调通知
- * 说明：需要在native.php或者jsapi.php中的填写回调地址。例如：http://www.xxx.com/wx/notify.php
+ * 异步回调通知
+ * 说明：需要在支付文件中（如native.php或者jsapi.php）的填写回调地址。例如：http://www.xxx.com/wx/notify.php
  * 付款成功后，微信服务器会将付款结果通知到该页面
  */
 header('Content-type:text/html; Charset=utf-8');
@@ -13,6 +13,16 @@ $result = $wxPay->notify();
 if($result){
     //完成你的逻辑
     //例如连接数据库，获取付款金额$result['cash_fee']，获取订单号$result['out_trade_no']，修改数据库中的订单状态等;
+	//现金支付金额：$result['cash_fee']
+	//订单金额：$result['total_fee']
+	//商户订单号：$result['out_trade_no']
+	//付款银行：$result['bank_type']
+	//货币种类：$result['fee_type']
+	//是否关注公众账号：$result['is_subscribe']
+	//用户标识：$result['openid']
+	//业务结果：$result['result_code']  SUCCESS/FAIL
+	//支付完成时间：$result['time_end']  格式为yyyyMMddHHmmss
+	//具体详细请看微信文档：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_7&index=8
 }else{
     echo 'pay error';
 }
