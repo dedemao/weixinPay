@@ -4,6 +4,7 @@
  * 说明：需要在支付文件中（如native.php或者jsapi.php）的填写回调地址。例如：http://www.xxx.com/wx/notify.php
  * 付款成功后，微信服务器会将付款结果通知到该页面
  */
+
 header('Content-type:text/html; Charset=utf-8');
 $mchid = 'xxxxx';          //微信支付商户号 PartnerID 通过微信支付商户资料审核后邮件发送
 $appid = 'xxxxx';  //公众号APPID 通过微信支付商户资料审核后邮件发送
