@@ -48,7 +48,11 @@ class WxpayService
         if (!isset($_GET['code'])){
             //触发微信返回code码
             $scheme = $_SERVER['HTTPS']=='on' ? 'https://' : 'http://';
-            $baseUrl = urlencode($scheme.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
+			$uri = $_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+			if($_SERVER['REQUEST_URI']){
+				$uri = $_SERVER['REQUEST_URI'];
+			}
+            $baseUrl = urlencode($scheme.$_SERVER['HTTP_HOST'].$uri);
             $url = $this->__CreateOauthUrlForCode($baseUrl);
             Header("Location: $url");
             exit();
