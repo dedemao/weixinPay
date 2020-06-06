@@ -1,9 +1,9 @@
 <?php
 header('Content-type:text/html; Charset=utf-8');
-/** 请填写以下配置信息 */
+/** 请填写以下配置信息 **/
 $publicKeyPath = getcwd() . '/cert/public_key.pem';    //微信支付公钥证书文件路径，可以到 https://www.dedemao.com/wx/wx_publickey_download.php 生成
 $apiKey = 'xxxxx';   //https://pay.weixin.qq.com 帐户中心-安全中心-API安全-APIv3密钥-设置密钥
-/** 配置结束 */
+/** 配置结束 **/
 
 $wxPay = new WxpayService($apiKey, $publicKeyPath);
 $result = $wxPay->validate();
