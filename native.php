@@ -51,7 +51,7 @@ class WxpayService
             'notify_url' => $notifyUrl,
             'out_trade_no' => $outTradeNo,
             'spbill_create_ip' => '127.0.0.1',
-            'total_fee' => intval($totalFee * 100),       //单位 转为分
+            'total_fee' => floatval($totalFee) * 100,       //单位 转为分
             'trade_type' => 'NATIVE',
         );
         $unified['sign'] = self::getSign($unified, $config['key']);
