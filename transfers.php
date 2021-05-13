@@ -153,7 +153,7 @@ class WxpayService
             're_user_name'=>$trueName,                 //收款用户真实姓名（不支持给非实名用户打款）
             'partner_trade_no' => $outTradeNo,
             'spbill_create_ip' => '127.0.0.1',
-            'amount' => intval($totalFee * 100),       //单位 转为分
+            'amount' => floatval($totalFee) * 100,       //单位 转为分
             'desc'=>'付款',            //企业付款操作说明信息
         );
         $unified['sign'] = self::getSign($unified, $config['key']);
