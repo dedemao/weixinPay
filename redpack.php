@@ -162,7 +162,7 @@ class WxpayService
             're_openid' => $openid,
             'mch_billno' => $outTradeNo,
             'client_ip' => '127.0.0.1',
-            'total_amount' => intval($totalFee * 100),       //单位 转为分
+            'total_amount' => floatval($totalFee) * 100,       //单位 转为分
             'total_num'=>1,     //红包发放总人数
             'wishing'=>$wishing,      //红包祝福语
             'act_name'=>$actName,           //活动名称
