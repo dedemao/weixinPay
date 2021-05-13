@@ -112,7 +112,7 @@ class WxpayService
             'notify_url' => $this->notifyUrl,
             'out_trade_no' => $this->outTradeNo,
             'spbill_create_ip' => $_SERVER['REMOTE_ADDR'],
-            'total_fee' => intval($this->totalFee * 100),       //单位 转为分
+            'total_fee' => floatval($this->totalFee) * 100,       //单位 转为分
             'trade_type' => 'MWEB',
             'scene_info'=>json_encode($scene_info)
         );
