@@ -84,7 +84,7 @@ class WxpayService
             'nonce_str' => self::createNonceStr(),
             'out_trade_no' => $config['out_trade_no'],
             'spbill_create_ip' => '127.0.0.1',
-            'total_fee' => intval($config['total_fee'] * 100),       //单位 转为分
+            'total_fee' => floatval($config['total_fee']) * 100,       //单位 转为分
             'auth_code'=>$config['auth_code'],     //收款码,
             'device_info'=>'dedemao001',        //终端设备号(商户自定义，如门店编号)
 //            'limit_pay'=>'no_credit'            //指定支付方式  no_credit--指定不能使用信用卡支付
