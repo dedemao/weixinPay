@@ -189,7 +189,7 @@ class WxpayService
             'openid' => $openid,            //rade_type=JSAPI，此参数必传
             'out_trade_no' => $outTradeNo,
             'spbill_create_ip' => '127.0.0.1',
-            'total_fee' => intval($totalFee * 100),       //单位 转为分
+            'total_fee' => bcmul($totalFee,100),       //单位 转为分
             'trade_type' => 'JSAPI',
         );
         $unified['sign'] = self::getSign($unified, $config['key']);
