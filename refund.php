@@ -54,8 +54,8 @@ class WxpayService
             'appid' => $config['appid'],
             'mch_id' => $config['mch_id'],
             'nonce_str' => self::createNonceStr(),
-            'total_fee' => intval($totalFee * 100),       //订单金额	 单位 转为分
-            'refund_fee' => intval($refundFee * 100),       //退款金额 单位 转为分
+            'total_fee' => floatval($totalFee) * 100,       //订单金额	 单位 转为分
+            'refund_fee' => floatval($refundFee) * 100,       //退款金额 单位 转为分
             'sign_type' => 'MD5',           //签名类型 支持HMAC-SHA256和MD5，默认为MD5
             'transaction_id'=>$wxOrderNo,               //微信订单号
             'out_trade_no'=>$orderNo,        //商户订单号
