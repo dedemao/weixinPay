@@ -22,7 +22,7 @@ if(isset($result['code'])){
     echo $result['code'].':'.$result['message'];exit();
 }
 //生成二维码
-$url = 'https://wenhairu.com/static/api/qr/?size=300&text=' . $result['code_url'];
+$url = 'https://api.qrcode-monkey.com/qr/custom?size=300&data=' . $result['code_url'];
 echo "<img src='{$url}' style='width:300px;'><br>";
 echo '二维码内容：' . $result['code_url'];
 
@@ -185,3 +185,4 @@ class WxpayService
         return base64_encode($sign);
     }
 }
+
