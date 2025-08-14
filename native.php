@@ -11,7 +11,7 @@ $notifyUrl = 'https://www.xxx.com/wx/notify.php';     //付款成功后的回调
 $payTime = time();      //付款时间
 $arr = $wxPay->createJsBizPackage($payAmount,$outTradeNo,$orderName,$notifyUrl,$payTime);
 //生成二维码
-$url = 'https://wenhairu.com/static/api/qr/?size=300&text='.$arr['code_url'];
+$url = 'https://api.qrcode-monkey.com/qr/custom?size=300&data='.$arr['code_url'];
 echo "<img src='{$url}' style='width:300px;'><br>";
 echo '二维码内容：'.$arr['code_url'];
 class WxpayService
@@ -199,3 +199,4 @@ class WxpayService
         return $reqPar;
     }
 }
+
